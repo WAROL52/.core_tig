@@ -4,7 +4,7 @@ include $(TIG_DIR)/core/Makefile ###
 
 
 define bash_function
-	bash -c 'source ./$(TIG_DIR)/bash/core.sh UTILS_DIR=$(UTILS_DIR) && $1 $2 $3 $4 $5 $6 $7 $8 $9'
+	bash -c 'source ./$(TIG_DIR)/bash/core.sh TIG_DIR=$(TIG_DIR) && $1 $2 $3 $4 $5 $6 $7 $8 $9'
 endef
 
 GIT_TARGET=$(GIT_PREFIX_ALIAS)$(SEPARATOR)

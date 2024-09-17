@@ -1,5 +1,9 @@
 #!/bin/bash
-source "$PWD/.tig/sh.conf"
+
+if [ -z "$TIG_DIR" ]; then
+		TIG_DIR=.core_tig
+fi
+source "$PWD/${TIG_DIR}/sh.conf"
 source "$PWD/.config"
 export BASH_DIR=$(dirname "$(realpath "$BASH_SOURCE")")
 export Red="\033[31m"
