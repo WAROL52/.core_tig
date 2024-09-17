@@ -19,7 +19,8 @@ function valgrind_run(){
 function make_all(){
 	mkdir -p $OUT_PATH
 	cd $WORKSPACE_PATH
-	make CFLAGS="$CFLAGS $CFLAGSW" > $OUT_PATH/make_out
+	make CFLAGS="$CFLAGS $CFLAGSW" > ../../$OUT_PATH/make_out
+	cd ../../
 }
 
 function make_re(){

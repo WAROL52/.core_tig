@@ -5,9 +5,9 @@
 #-----------------------------
 # Pour aider ...
 # ----------------------------
-UTILS_DIR=$UTILS_DIR
-REPOS_DIR=$REPOS_DIR
-RUN_DIR=$RUN_DIR
+SCRIPT_DIR=$SCRIPT_DIR
+WORKSPACE_DIR=$WORKSPACE_DIR
+
 CFLAGS=$CFLAGS
 CFLAGSW=$CFLAGSW
 CFLAGS_VALGRIND=$CFLAGS_VALGRIND
@@ -16,8 +16,8 @@ TIG_DIR=$TIG_DIR
 PROJET_NAME=$PROJET_NAME
 # ----------------------------
 WORKSPACE_PATH=$WORKSPACE_PATH
-RUN_PATH=$RUN_PATH
-UTILS_PATH=$UTILS_PATH
+
+SCRIPT_PATH=$SCRIPT_PATH
 OUT_PATH=$OUT_PATH
 ##############################
 
@@ -26,7 +26,7 @@ function add_workspace() {
 	cd ..
 	mkdir -p $MAKE_CMD_DIR
 	create_conf $1 $2 $3
-	git submodule add -f $2 $REPOS_DIR/$1
+	git submodule add -f $2 $WORKSPACE_DIR/$1
 	cp -r "$TIG_DIR/bash/template/[exemple]" "$TIG_DIR/bash/template/$1"
 	chmod 777 $TIG_DIR/bash/template/$1/*
 	mv "$TIG_DIR/bash/template/$1" $MAKE_CMD_DIR
@@ -51,7 +51,7 @@ function delete_workspace() {
 		rm -rf $conf_file
 	fi
 	sed -i "/^\[submodule \"Workspace\/$1\"\]/,+2d" .gitmodules
-	rm -rf $REPOS_DIR/$1 $MAKE_CMD_DIR/$1 $PWD/.git/modules/$REPOS_DIR/$1
+	rm -rf $WORKSPACE_DIR/$1 $MAKE_CMD_DIR/$1 $PWD/.git/modules/$WORKSPACE_DIR/$1
 }
 
 function delete_all_workspace() {

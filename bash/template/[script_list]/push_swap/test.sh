@@ -5,9 +5,9 @@
 #-----------------------------
 # Pour aider ...
 # ----------------------------
-readonly UTILS_DIR=$UTILS_DIR
-readonly REPOS_DIR=$REPOS_DIR
-readonly RUN_DIR=$RUN_DIR
+readonly SCRIPT_DIR=$SCRIPT_DIR
+readonly WORKSPACE_DIR=$WORKSPACE_DIR
+readonly 
 readonly CFLAGS=$CFLAGS
 readonly CFLAGSW=$CFLAGSW
 readonly CFLAGS_VALGRIND=$CFLAGS_VALGRIND
@@ -16,15 +16,15 @@ readonly TIG_DIR=$TIG_DIR
 readonly PROJET_NAME=$PROJET_NAME
 # ----------------------------
 readonly WORKSPACE_PATH=$WORKSPACE_PATH
-readonly RUN_PATH=$RUN_PATH
-readonly UTILS_PATH=$UTILS_PATH
+readonly 
+readonly SCRIPT_PATH=$SCRIPT_PATH
 readonly OUT_PATH=$OUT_PATH
 ##############################
 
 function make_test() {
 	local tmp=$OUT_PATH/tmp
 	local tmpVClient=$OUT_PATH/tmpVClient
-	local args=$(head -n 1 $UTILS_PATH/args.txt)
+	local args=$(head -n 1 $SCRIPT_PATH/args.txt)
 	mkdir -p $OUT_PATH
 	cd $WORKSPACE_PATH
 

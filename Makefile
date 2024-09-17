@@ -77,7 +77,7 @@ $(call gitaliasWithargs,$(ALIAS_PERF)):
 	@$(call bash_function,perf_workspace,$(call gitaliasArg,$@))
 	@$(call logEnd,$@)
 
-GET_PATERN=./$(MAKE_CMD_DIR)/$1/**/*$2 ./$(REPOS_DIR)/$1/**/*$2 ./$(RUN_DIR)/$1/**/*$2
+GET_PATERN=./$(MAKE_CMD_DIR)/$1/**/*$2 ./$(WORKSPACE_DIR)/$1/**/*$2
 PATERN_C= $(call GET_PATERN,$1,.c) $(call GET_PATERN,$1,.h) $(call GET_PATERN,$1,.cpp)
 PATERN_CMD= $(call GET_PATERN,$1,.sh)
 PATERN_TXT= $(call GET_PATERN,$1,.txt) $(call GET_PATERN,$1,.text)
@@ -87,15 +87,11 @@ PATERN_BER= $(call GET_PATERN,$1,.ber)
 
 PATERN_ALL= $(call PATERN_BER,$1) $(call PATERN_C,$1) $(call PATERN_CMD,$1) $(call PATERN_MAKEFILE,$1) $(call PATERN_PY,$1) $(call PATERN_TXT,$1)
 DEPS=
-run-w\:%:clean-out
-	@rm -rf out/*.a
-	@$(call make_fclean_c,$(subst run-w:,,$@))
-	@# @watch -n 0.2 -c -d "make run:$(subst run-w:,,$@)"
-	@sleep 0.5 ; clear
-	@$(call make_watch, $(call bash_function,run_w_workspace,$(subst run-w:,,$@)) ,$(call PATERN_ALL,$(subst run-w:,,$@)) $(DEPS))
-	@$(call logEnd,$@)
+
+
 
 env:
+	echo "$(call gitaliasWithargs,$(ALIAS_RUN_WATCH))"
 	@$(call echoObj,MY_NAME:,$(MY_NAME))
 	@$(call echoObj,CC:,$(CC))
 	@$(call echoObj,TMP_SRC:,$(TMP_SRC))
@@ -142,3 +138,8 @@ script-get\:%:
 	@$(call bash_function,script_get_workspace,$(subst script-get:,,$@))
 	@$(call logEnd,$@)
 
+$(call gitaliasWithargs,$(ALIAS_RUN_WATCH)):
+	@rm -rf out/*.a
+	@sleep 0.5 ; clear
+	@$(call make_watch, $(call bash_function,run_w_workspace,$(call gitaliasArg,$@)),$(call PATERN_ALL,$(call gitaliasArg,$@)$(DEPS)))
+	@$(call logEnd,$@)

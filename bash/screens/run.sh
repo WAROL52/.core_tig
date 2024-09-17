@@ -5,9 +5,9 @@
 #-----------------------------
 # Pour aider ...
 # ----------------------------
-UTILS_DIR=$UTILS_DIR
-REPOS_DIR=$REPOS_DIR
-RUN_DIR=$RUN_DIR
+SCRIPT_DIR=$SCRIPT_DIR
+WORKSPACE_DIR=$WORKSPACE_DIR
+
 CFLAGS=$CFLAGS
 CFLAGSW=$CFLAGSW
 CFLAGS_VALGRIND=$CFLAGS_VALGRIND
@@ -16,8 +16,8 @@ TIG_DIR=$TIG_DIR
 PROJET_NAME=$PROJET_NAME
 # ----------------------------
 WORKSPACE_PATH=$WORKSPACE_PATH
-RUN_PATH=$RUN_PATH
-UTILS_PATH=$UTILS_PATH
+
+SCRIPT_PATH=$SCRIPT_PATH
 OUT_PATH=$OUT_PATH
 ##############################
 
@@ -27,6 +27,6 @@ function run_workspase() {
 	echo "-------------------------"
 	echo -e "${Title}PROJET_NAME${Normal}= $PROJET_NAME |PID: $$"
 	echo "-------------------------"
-	source $PWD/$UTILS_DIR/$PROJET_NAME/run.sh
+	source $PWD/$SCRIPT_DIR/$PROJET_NAME/run.sh
 	run
 }

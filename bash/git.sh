@@ -46,7 +46,7 @@ git_push(){
 
 git_push_auto() {
 
-	cd $REPOS_DIR
+	cd $WORKSPACE_DIR
 	read -p "Description: " GIT_PUSH_MSG
 	while read -r name url; do
 	git_push $name "$GIT_PUSH_MSG"
