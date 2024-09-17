@@ -122,23 +122,23 @@ watch:
 	$(eval COMMANDS=$(subst ", \", $(COMMANDS)))
 	@$(call make_watch,$(COMMANDS),$(DEPS))
 
-model-save\:%:
-	@$(call bash_function,model_save_workspace,$(subst model-save:,,$@))
+script-save\:%:
+	@$(call bash_function,script_save_workspace,$(subst script-save:,,$@))
 	@$(call logEnd,$@)
 
-model-delete\:%:
-	@$(call bash_function,model_delete_workspace,$(subst model-delete:,,$@))
+script-delete\:%:
+	@$(call bash_function,script_delete_workspace,$(subst script-delete:,,$@))
 	@$(call logEnd,$@)
 
-model-list:
-	@$(call bash_function,model_list_workspace)
+script-list:
+	@$(call bash_function,script_list_workspace)
 	@$(call logEnd,$@)
 
-model-set\:%:
-	@$(call bash_function,model_set_workspace,$(subst model-set:,,$@))
+script-set\:%:
+	@$(call bash_function,script_set_workspace,$(subst script-set:,,$@))
 	@$(call logEnd,$@)
 
-model-get\:%:
-	@$(call bash_function,model_get_workspace,$(subst model-get:,,$@))
+script-get\:%:
+	@$(call bash_function,script_get_workspace,$(subst script-get:,,$@))
 	@$(call logEnd,$@)
 

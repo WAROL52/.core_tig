@@ -21,35 +21,35 @@ UTILS_PATH=$UTILS_PATH
 OUT_PATH=$OUT_PATH
 ##############################
 
-MODEL_LIST=$PWD/$TIG_DIR/bash/template/'[model_list]'
+SCRIPT_LIST=$PWD/$TIG_DIR/bash/template/'[script_list]'
 
-function model_list_workspace() {
-	ls $MODEL_LIST
+function script_list_workspace() {
+	ls $SCRIPT_LIST
 }
 
-function model_delete_workspace() {
+function script_delete_workspace() {
 	local txt_repos="${OBJ_COLOR}$MAKE_CMD_DIR/$repos${NO_COLOR}"
-	local txt_model="${OBJ_COLOR}$TIG_DIR/bash/template/'[model_list]'/$1${NO_COLOR}"
-	if [ -e "$MODEL_LIST/$1" ];then
-		echo -e "le ${txt_model} sera suprime en local."
+	local txt_script="${OBJ_COLOR}$TIG_DIR/bash/template/'[script_list]'/$1${NO_COLOR}"
+	if [ -e "$SCRIPT_LIST/$1" ];then
+		echo -e "le ${txt_script} sera suprime en local."
 		printf "${URL_COLOR}Voulez-vous continuer ? (oui/non): ${NO_COLOR}"
 		read reponse
 		if [[ "$reponse" == "oui" || "$reponse" == "o" || "$reponse" == "O" ]]; then
-			rm -rf $MODEL_LIST/$1
+			rm -rf $SCRIPT_LIST/$1
 			echo -e "${OK_COLOR}ok$NO_COLOR"
 		else
 			echo "Annulation de la commande."
 		fi
 	else
-		echo -e "$txt_model introuvable!"
+		echo -e "$txt_script introuvable!"
 	fi
 }
 
-function model_save_workspace() {
+function script_save_workspace() {
 	local txt_repos="${OBJ_COLOR}$MAKE_CMD_DIR/$repos${NO_COLOR}"
-	local txt_model="${OBJ_COLOR}$TIG_DIR/bash/template/'[model_list]'/$1/*${NO_COLOR}"
-	if [ -e "$MODEL_LIST/$1" ];then
-		echo -e "${txt_model} existe deja!\nPour mettre a jour:'$>${COM_COLOR}make ${WARN_COLOR}model-set:$1${NO_COLOR}' "
+	local txt_script="${OBJ_COLOR}$TIG_DIR/bash/template/'[script_list]'/$1/*${NO_COLOR}"
+	if [ -e "$SCRIPT_LIST/$1" ];then
+		echo -e "${txt_script} existe deja!\nPour mettre a jour:'$>${COM_COLOR}make ${WARN_COLOR}script-set:$1${NO_COLOR}' "
 	else
 		if [ -z "$repos" ]; then
 			list_workspace
@@ -57,11 +57,11 @@ function model_save_workspace() {
 			read repos
 		fi
 		if [ -d "$PWD/$MAKE_CMD_DIR/$repos" ];then
-			echo -e "le ${txt_repos} sera sauvegarde dans ${txt_model} en tant que nouveau model."
+			echo -e "le ${txt_repos} sera sauvegarde dans ${txt_script} en tant que nouveau script."
 			printf "${URL_COLOR}Voulez-vous continuer ? (oui/non): ${NO_COLOR}"
 			read reponse
 			if [[ "$reponse" == "oui" || "$reponse" == "o" || "$reponse" == "O" ]]; then
-				cp -r  $PWD/$MAKE_CMD_DIR/$repos $MODEL_LIST/$1
+				cp -r  $PWD/$MAKE_CMD_DIR/$repos $SCRIPT_LIST/$1
 				echo -e "${OK_COLOR}ok$NO_COLOR"
 			else
 				echo "Annulation de la commande."
@@ -72,52 +72,52 @@ function model_save_workspace() {
 	fi
 }
 
-function model_set_workspace() {
+function script_set_workspace() {
 	if [ -z "$repos" ]; then
 		list_workspace
 		printf "${COM_COLOR}Choisi un repos: ${NO_COLOR}"
 		read repos
 	fi
 	if [ -f "$PWD/$TIG_DIR/register/$repos" ];then
-		if [ -e "$MODEL_LIST/$1" ];then
-			echo -e "Les changements locaux dans ${OBJ_COLOR}$TIG_DIR/bash/template/'[model_list]'/$1/*${NO_COLOR} seront ecrase."
+		if [ -e "$SCRIPT_LIST/$1" ];then
+			echo -e "Les changements locaux dans ${OBJ_COLOR}$TIG_DIR/bash/template/'[script_list]'/$1/*${NO_COLOR} seront ecrase."
 			printf "${URL_COLOR}Voulez-vous continuer ? (oui/non): ${NO_COLOR}"
 			read reponse
 			if [[ "$reponse" == "oui" || "$reponse" == "o" || "$reponse" == "O" ]]; then
-				rm -rf $MODEL_LIST/$1 
-				cp -r  $PWD/$MAKE_CMD_DIR/$repos $MODEL_LIST/$1
+				rm -rf $SCRIPT_LIST/$1 
+				cp -r  $PWD/$MAKE_CMD_DIR/$repos $SCRIPT_LIST/$1
 				echo -e "${OK_COLOR}ok$NO_COLOR"
 			else
 				echo "Annulation de la commande."
 			fi
 		else
-			echo "model '$1' introuvable!"
+			echo "script '$1' introuvable!"
 		fi	
 	else
 		echo "repos '$repos' introuvable"
 	fi
 }
 
-function model_get_workspace() {
+function script_get_workspace() {
 	if [ -z "$repos" ]; then
 		list_workspace
 		printf "${COM_COLOR}Choisi un repos: ${NO_COLOR}"
 		read repos
 	fi
 	if [ -f "$PWD/$TIG_DIR/register/$repos" ];then
-		if [ -e "$MODEL_LIST/$1" ];then
+		if [ -e "$SCRIPT_LIST/$1" ];then
 			echo -e "Les changements locaux dans ${OBJ_COLOR}$PWD/$MAKE_CMD_DIR/$repos/*${NO_COLOR} seront ecrase."
 			printf "${URL_COLOR}Voulez-vous continuer ? (oui/non): ${NO_COLOR}"
 			read reponse
 			if [[ "$reponse" == "oui" || "$reponse" == "o" || "$reponse" == "O" ]]; then
 				rm -rf $PWD/$MAKE_CMD_DIR/$repos
-				cp -r $MODEL_LIST/$1 $PWD/$MAKE_CMD_DIR/$repos
+				cp -r $SCRIPT_LIST/$1 $PWD/$MAKE_CMD_DIR/$repos
 				echo -e "${OK_COLOR}ok$NO_COLOR"
 			else
 				echo "Annulation de la commande."
 			fi
 		else
-			echo "model '$1' introuvable!"
+			echo "script '$1' introuvable!"
 		fi	
 	else
 		echo "repos '$repos' introuvable"
