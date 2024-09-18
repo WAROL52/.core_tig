@@ -15,10 +15,13 @@ git_push(){
 	local oldpwd=$PWD
 	local name=$1
 	local GIT_PUSH_MSG=$2
-	local text=$(printf "\033[1;36m|git push:\033[0m %19s\033[1;36m|\033[0m" "$name")
-	printline 29
+	local prefix="\033[1;36m|git push:\033[0m "
+	local suffix="\033[1;36m|\033[0m"
+	local text=$(printf "${prefix}%19s${suffix}" "$name")
+	local text_size=$((${#text}-${#prefix}-${#suffix}+22))
+	printline $text_size
 	printf "%s\n" "$text"
-	printline 29
+	printline $text_size
 	cd $name
 	if [ -e ".git" ]; then
       	if [ -n "$(git status --porcelain)" ]; then
