@@ -41,5 +41,6 @@ git_push(){
       echo -e "\033[0;36m$name\033[0m non installé!"
     fi
 	cd $oldpwd
+	echo
 }
 
