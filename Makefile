@@ -58,7 +58,7 @@ $(call gitalias,$(GIT_ALIAS_PUSH)):
 	@$(call logEnd,$@)
 
 $(call gitaliasWithargs,$(GIT_ALIAS_PUSH)):
-	@$(call bash_function,push_workspace,$(call gitaliasArg,$@))
+	@$(call bash_function,push_workspace,$(WORKSPACE_DIR)/$(call gitaliasArg,$@))
 	@$(call logEnd,$@)
 
 $(call gitalias,$(GIT_ALIAS_PULL)):

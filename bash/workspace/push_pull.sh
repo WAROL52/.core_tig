@@ -22,15 +22,13 @@ OUT_PATH=$OUT_PATH
 ##############################
 
 function push_workspace() {
-	cd $WORKSPACE_DIR
 	git_push $1 "$2"
-	cd ..
 }
 
 _GIT_PUSH_MSG_=""
 
 function _push_all_() {
-	push_workspace $1 "$_GIT_PUSH_MSG_"
+	push_workspace "$WORKSPACE_DIR/$1" "$_GIT_PUSH_MSG_"
 }
 
 function push_all_workspace() {

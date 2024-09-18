@@ -12,6 +12,7 @@ log_info()
 }
 
 git_push(){
+	local oldpwd=$PWD
 	local name=$1
 	local GIT_PUSH_MSG=$2
 	local text=$(printf "\033[1;36m|git push:\033[0m %19s\033[1;36m|\033[0m" "$name")
@@ -21,6 +22,7 @@ git_push(){
 	if [ -z "$GIT_PUSH_MSG" ]; then
 		read -p "Description: " GIT_PUSH_MSG
 	fi
+	echo "oldpwd=$oldpwd"
 	cd $name
 	if [ -e ".git" ]; then
       if [ -n "$(git status --porcelain)" ]; then
@@ -38,22 +40,8 @@ git_push(){
 		log_info "Info:" "Aucune modification pour $name!"
       fi
     else
-      echo -e "\033[0;36mWorkspace/$name\033[0m non installé!"
+      echo -e "\033[0;36m$name\033[0m non installé!"
     fi
-	cd ..
+	cd $oldpwd
 }
 
-
-git_push_auto() {
-
-	cd $WORKSPACE_DIR
-	read -p "Description: " GIT_PUSH_MSG
-	while read -r name url; do
-	git_push $name "$GIT_PUSH_MSG"
-	echo -e "\n"
-	done < <(echo "$GITHUB_URL" | awk '{for (i=1; i<=NF; i+=2) print $i, $(i+1)}')
-	cd ..
-	local projetname=$(basename $(pwd))
-	cd ..
-	git_push "$projetname" "$GIT_PUSH_MSG"
-}
