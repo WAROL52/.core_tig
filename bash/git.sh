@@ -21,10 +21,10 @@ git_push(){
 	printline 30
 	cd $name
 	if [ -e ".git" ]; then
-		if [ -z "$GIT_PUSH_MSG" ]; then
-			read -p "Description: " GIT_PUSH_MSG
-		fi
       	if [ -n "$(git status --porcelain)" ]; then
+			if [ -z "$GIT_PUSH_MSG" ]; then
+				read -p "Description: " GIT_PUSH_MSG
+			fi
 	  		log_info "[1]:" "pwd"
 			pwd
 			log_info "[2]:" "git add ."
