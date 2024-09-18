@@ -17,10 +17,11 @@ function valgrind_run(){
 }
 
 function make_all(){
+	local oldpwd=$PWD
 	mkdir -p $OUT_PATH
 	cd $WORKSPACE_PATH
-	make CFLAGS="$CFLAGS $CFLAGSW" > ../../$OUT_PATH/make_out
-	cd ../../
+	make CFLAGS="$CFLAGS $CFLAGSW" > $oldpwd/$OUT_PATH/make_out
+	cd $oldpwd
 }
 
 function make_re(){
