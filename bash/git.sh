@@ -3,7 +3,7 @@
 printline(){
 	local size=$1
 	printf "\033[0;36m|"
-	printf "%.0s▓" $(seq 1 $size)
+	printf "%.0s░" $(seq 1 $size)
 	printf "|\033[0m\n"
 }
 log_info()
