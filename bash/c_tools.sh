@@ -12,7 +12,7 @@ function valgrind_run(){
 	echo -e "${Reverse}"
 	echo "Temps: $timesDiff ms "
 	grep "in use at exit" < $valgrind_out | sed 's/^==[0-9]*==     in use at exit/Memoire/'
-	grep "total heap usage" < $valgrind_out | sed 's/^==[0-9]*==   total heap usage/Allocation/'
+	grep "total heap usage" < $valgrind_out | sed "s/^==[0-9]*==   total heap usage/Allocation/"
 	echo -e "${Normal}"
 }
 
