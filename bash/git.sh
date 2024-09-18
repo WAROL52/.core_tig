@@ -19,26 +19,24 @@ git_push(){
 	printline 30
 	printf "%s\n" "$text"
 	printline 30
-	if [ -z "$GIT_PUSH_MSG" ]; then
-		read -p "Description: " GIT_PUSH_MSG
-	fi
-	echo "oldpwd=$oldpwd"
 	cd $name
 	if [ -e ".git" ]; then
-      if [ -n "$(git status --porcelain)" ]; then
-	  log_info "[1]:" "pwd"
-		pwd
-		log_info "[2]:" "git add ."
-        git add .
-		log_info "[3]:" "git commit -m \"\033[32m$GIT_PUSH_MSG\033[0m\""
-        git commit -m "$GIT_PUSH_MSG"
-		log_info "[4]:" "git push $GIT_REMOTE $GIT_BRANCH"
-        git push $GIT_REMOTE $GIT_BRANCH 
-        
-        echo "Push effectué pour $name"
-      else
-		log_info "Info:" "Aucune modification pour $name!"
-      fi
+		if [ -z "$GIT_PUSH_MSG" ]; then
+			read -p "Description: " GIT_PUSH_MSG
+		fi
+      	if [ -n "$(git status --porcelain)" ]; then
+	  		log_info "[1]:" "pwd"
+			pwd
+			log_info "[2]:" "git add ."
+        	git add .
+			log_info "[3]:" "git commit -m \"\033[32m$GIT_PUSH_MSG\033[0m\""
+        	git commit -m "$GIT_PUSH_MSG"
+			log_info "[4]:" "git push $GIT_REMOTE $GIT_BRANCH"
+        	git push $GIT_REMOTE $GIT_BRANCH 
+        	echo "Push effectué pour $name"
+      	else
+			log_info "Info:" "Aucune modification pour $name!"
+      	fi
     else
       echo -e "\033[0;36m$name\033[0m non installé!"
     fi
