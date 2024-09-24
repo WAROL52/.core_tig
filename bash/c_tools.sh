@@ -21,6 +21,10 @@ function make_all(){
 	mkdir -p $OUT_PATH
 	cd $WORKSPACE_PATH
 	make CFLAGS="$CFLAGS $CFLAGSW" > $oldpwd/$OUT_PATH/make_out
+	if [[ $? -gt 0 ]]; then
+		cd $oldpwd
+        return 1
+    fi
 	cd $oldpwd
 }
 
