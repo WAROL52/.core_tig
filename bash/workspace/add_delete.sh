@@ -26,7 +26,7 @@ function add_workspace() {
 	cd ..
 	mkdir -p $MAKE_CMD_DIR
 	create_conf $1 $2 $3
-	git submodule add -f $2 $WORKSPACE_DIR/$1
+	git submodule add $2 $WORKSPACE_DIR/$1
 	cp -r "$TIG_DIR/bash/template/[exemple]" "$TIG_DIR/bash/template/$1"
 	chmod 777 $TIG_DIR/bash/template/$1/*
 	mv "$TIG_DIR/bash/template/$1" $MAKE_CMD_DIR
